@@ -16,7 +16,7 @@ def mandelbrot(x_start, x_end, y_start, y_end, N):
         N (_type_): Number of divisions between x and y in which to evaluate + 1
 
     Returns:
-        z: mandelbrot set
+        z: generated mandelbrot set
     """
     delta = (x_end - x_start)/N
 
@@ -34,4 +34,5 @@ plt.title("Mandelbrot Set")
 plt.xlabel("X value")
 plt.ylabel("Y value")
 plt.imshow(np.absolute(mandelbrot(x_start, x_end, y_start, y_end, N)), extent=(x_start,x_end,y_start,y_end))
+plt.savefig("Mandelbrot.png")
 plt.show()
