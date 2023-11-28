@@ -18,11 +18,11 @@ def numerical_traj_ex(t_span, y0, t, sigma, r, b):
     # Integrate the equations of motion
     sol = solve_ivp(derivative_func, t_span, y0, t_eval=t, method='LSODA')
 
-    # Extract time and y values
-    t_result = sol.t
-    y_result = sol.y[1, :]  # Extracting the second component (y)
+    # Extract x and z values
+    x_result = sol.y[0, :]  # Extracting the first component (x)
+    z_result = sol.y[2, :]  # Extracting the third component (z)
 
-    return t_result, y_result
+    return x_result, z_result
 
 # Set the parameters
 sigma = 10
@@ -36,16 +36,16 @@ initial_conditions = [0, 1, 0]
 time_span = (0, 50)
 
 # Set the time points where you want to evaluate the solution
-time_points = np.linspace(time_span[0], time_span[1], 1000)
+time_points = np.linspace(time_span[0], time_span[1], 10000)
 
 # Solve the Lorenz equations
-t_values, y_values = numerical_traj_ex(time_span, initial_conditions, time_points, sigma, r, b)
+x_values, z_values = numerical_traj_ex(time_span, initial_conditions, time_points, sigma, r, b)
 
-# Plot y as a function of time
-plt.plot(t_values, y_values, label='y(t)')
-plt.title('Lorenz Equations: y as a function of time')
-plt.xlabel('Time')
-plt.ylabel('y')
+# Plot z against x
+plt.plot(x_values, z_values, label='Lorenz Attractor')
+plt.title('Lorenz Attractor: z against x')
+plt.xlabel('x')
+plt.ylabel('z')
 plt.legend()
-plt.savefig("lorenz.png")
+plt.savefig("butterfly.png")
 plt.show()
